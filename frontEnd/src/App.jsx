@@ -30,7 +30,7 @@ function App() {
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/place-order" element={<PlaceOrder />}></Route>
-          <Route path="/order" element={<Order />}></Route>
+          <Route path="/orders" element={<Order />}></Route>
         </Routes>
         <Footer></Footer>
       </div>

@@ -15,7 +15,7 @@ const loginUser = async (req, res) => {
 
     if (!user) {
       return res.json({
-        succes: false,
+        success: false,
         message: "El usuario no existe, revisa si tu email esta bien escrito",
       });
     }
@@ -23,13 +23,13 @@ const loginUser = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (isMatch) {
       const token = createToken(user._id);
-      res.json({ succes: true, token });
+      res.json({ success: true, token });
     } else {
-      res.json({ succes: false, message: "La contraseña no es correcta" });
+      res.json({ success: false, message: "La contraseña no es correcta" });
     }
   } catch (error) {
     console.log(error);
-    res.json({ succes: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };
 
@@ -40,16 +40,16 @@ const registerUser = async (req, res) => {
     //validar si el usuario existe  o no
     const exist = await userModel.findOne({ email });
     if (exist) {
-      return res.json({ succes: false, message: "El usuario ya existe" });
+      return res.json({ success: false, message: "El usuario ya existe" });
     }
     // validar el formato del email y contraseña fuerte
     if (!validator.isEmail(email)) {
-      return res.json({ succes: false, message: "El email no es valido" });
+      return res.json({ success: false, message: "El email no es valido" });
     }
 
     if (password.length < 8) {
       return res.json({
-        succes: false,
+        success: false,
         message: "La contraseña debe tener al menos 8 caracteres",
       });
     }
@@ -67,10 +67,10 @@ const registerUser = async (req, res) => {
     const user = await newUser.save();
     const token = createToken(user._id);
 
-    res.json({ succes: true, message: "Usuario registrado", token });
+    res.json({ success: true, message: "Usuario registrado", token });
   } catch (error) {
     console.log(error);
-    res.json({ succes: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };
 
@@ -85,13 +85,13 @@ const adminLogin = async (req, res) => {
      {
       
       const token = jwt.sign(email + password, process.env.JWT_SECRET); //crear un token para el admin
-      res.json({ succes: true, token }); //enviar el token
+      res.json({ success: true, token }); //enviar el token
     } else {
-      res.json({ succes: false, message: "Email o contraseña incorrectos" });
+      res.json({ success: false, message: "Email o contraseña incorrectos" });
     }
   } catch (error) {
     console.log(error);
-    res.json({ succes: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };
 
