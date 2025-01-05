@@ -6,6 +6,8 @@ import { connect } from 'mongoose';
 import connectCloudinary from './config/cloudinary.js'; //importamos la funcion de conexion a cloudinary
 import userRouter from './routes/usrRoutes.js';
 import productRouter from './routes/productsRoutes.js';
+import cartRouter from './routes/cartRoutes.js';
+import orderRouter from './routes/orderRoute.js';
 
 
 //APP  config
@@ -22,6 +24,8 @@ app.use(cors());
 //api endpoints
 app.use('/api/user',userRouter);
 app.use('/api/product/',productRouter);
+app.use('/api/cart/',cartRouter);
+app.use('/api/order', orderRouter)
 
 app.get('/', (req, res) => res.status(200).send('Hello World la api funciona desgraciaooo'));
 
