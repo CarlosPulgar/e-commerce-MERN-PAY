@@ -1,8 +1,34 @@
+import orderModel from "../models/orderModel.js"
+import userModel from "../models/userModels.js"
 
-
-// placing orders using COD method
+// placing orders using COD (cash on delivery) method
 
 const placeOrder = async ( req, res) =>{
+
+try{
+
+    const {userId, items, amount, address} = req.body
+
+    const orderData = {
+        userId,
+        items,
+        address,
+        amount,
+        paymentMethod:'COD',
+        payment:false,
+        date: Date.now()
+    }
+
+    const newOrder = new orderModel(orderData)
+    await newOrder.save()
+
+    await userModel.findByIdAndUpdate(userId, {cartData:{}}) // esto es para borrar los objetos en el carrito una vez se a hecho la transaccion corectamente 
+    res.json({ success: true, message: "Todo listo recibiras un email con mas detalles de tu compra" }); //mandamos un mensaje de exito
+}catch(error){
+    console.log(error);
+    res.json({ success: false, message:error.message }); //mandamos un mensaje de error
+    
+}
 
 }
 
