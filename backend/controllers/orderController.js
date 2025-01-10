@@ -163,7 +163,7 @@ const updateStatus = async (req, res) => {
 
 export {
   placeOrder,
-  placeOrderMercadoPago,
+  
   placeOrderStripe,
   allOrders,
   userOrders,
