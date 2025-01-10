@@ -18,13 +18,13 @@ const Orders = ({ token }) => {
         { headers: { token } }
       );
       if (response.data.success) {
-        setOrders(response.data.orders);
+        setOrders(response.data.orders.reverse());
       } else {
-        toast.error("occurio un error");
+        toast.error("ocurrio un error");
       }
     } catch (error) {
       console.log(error);    
-      toast.error("occurio un error");
+      toast.error("ocurrio un error");
     }
   };
 
