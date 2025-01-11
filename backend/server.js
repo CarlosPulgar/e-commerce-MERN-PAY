@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';    
 import 'dotenv/config' ;    
 import connectDB from './config/mongodb.js'; //importamos la funcion de conexion a la base de datos
-import { connect } from 'mongoose';
+/* import { connect } from 'mongoose'; */
 import connectCloudinary from './config/cloudinary.js'; //importamos la funcion de conexion a cloudinary
 import userRouter from './routes/usrRoutes.js';
 import productRouter from './routes/productsRoutes.js';
