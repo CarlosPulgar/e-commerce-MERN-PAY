@@ -74,9 +74,6 @@ const Collection = () => {
 
 useEffect(() => {
  
-
-
- 
 }, [category])
 
 useEffect(() => {
