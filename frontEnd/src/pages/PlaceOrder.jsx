@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 const PlaceOrder = () => {
 
   const [method, setMethod] = useState('cod')
-  const {navigate, token, cartItems, setCartItems, getCartAmount, delivery_fee, products} = useContext(ShopContext);
+  const {navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, delivery_fee, products} = useContext(ShopContext);
 
   const [formData, setFormData] = useState({
     firstName:'',
@@ -60,7 +60,7 @@ const PlaceOrder = () => {
         // API para saber el tipo de pago
         switch (method){
           case 'cod':
-            const response = await axios.post('http://localhost:3000/api/order/place', orderData, {headers:{token}})
+            const response = await axios.post(backendUrl +'/api/order/place', orderData, {headers:{token}})
             if(response.data.success){
               setCartItems({})
               navigate('/orders')
@@ -70,7 +70,7 @@ const PlaceOrder = () => {
             break;
 
           case 'stripe' :   
-            const responseStripe=await axios.post('http://localhost:3000/api/order/stripe', orderData, {headers:{token}})
+            const responseStripe=await axios.post(backendUrl +'/api/order/stripe', orderData, {headers:{token}})
             if(responseStripe.data.success){
               const {session_url} = responseStripe.data
               window.location.replace(session_url)
