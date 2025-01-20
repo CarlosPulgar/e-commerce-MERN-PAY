@@ -13,7 +13,7 @@ import orderRouter from './routes/orderRoute.js';
 //APP  config
 
 const app = express();     //Agregamos la funcion de express
-const port = process.env.PORT || 9000;      //Agregamos el puerto de la aplicacion
+const port = process.env.PORT || 9001;      //Agregamos el puerto de la aplicacion
 connectDB();    //Agregamos la funcion de conexion a la base de datos
 connectCloudinary();    //Agregamos la funcion de conexion a cloudinary
 

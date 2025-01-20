@@ -34,8 +34,8 @@ function App() {
           <Route path="/orders" element={<Order />}></Route>
           <Route path="/verify" element={<Verify />}></Route>
         </Routes>
-        <Footer></Footer>
       </div>
+        <Footer></Footer>
     </>
   );
 }

@@ -35,18 +35,18 @@ const Product = () => {
           <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full">
           {
               productData.image.map((item, index)=>(
-                <img onClick={()=>setImageProduct(item)} src={item} key={index} className='w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer' alt="" />
+                <img onClick={()=>setImageProduct(item)} src={item} key={index} className='w-[24%]   sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer' alt="" />
               ))
             }
           </div>
-          <div className="w-fullsm:w-[80%]">
-            <img className='w-full h-auto' src={imageProduct} alt="" />
+          <div className="w-full sm:w-[80%]">
+            <img className='h-[450px] w-[390px]' src={imageProduct} alt="" />
           </div>
         </div>
         {/* PRODUCT INFO */}
         <div className="flex-1">
           <h1 className='font-medium text-2xl mt-2'>{productData.name}</h1>
-          <div className="flex items-center gap-1 mt-2">
+          <div className=" flex items-center gap-1 mt-2">
             <img src={assets.star_icon} alt="" />
             <img src={assets.star_icon} alt="" />
             <img src={assets.star_icon} alt="" />
