@@ -113,7 +113,7 @@ const Login = () => {
             </p>
           )}
         </div>
-        <button className=" w-[140px] h-[40px] bg-black text-white font-light px-2 py-2 ">
+        <button className=" w-[140px] h-[40px] bg-black text-white font-light px-2 py-2 mb-5 ">
           {currentState === "Login" ? "Sign In " : "Sign Up"}
         </button>
       </form>

@@ -15,7 +15,8 @@ const ShopContextProvider = (props) => {
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
   const [products, setProducts] = useState([])
-  const [token, setToken] = useState('')
+  const [token,setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token'):false)// para borrar el token en localstorage si se presiona logout
+  const [userData, setUserData] = useState(false)
   const navigate = useNavigate();
 
   const addToCart = async (itemId, size) => {
@@ -111,6 +112,23 @@ const ShopContextProvider = (props) => {
       console.log(error)}
   }
 
+  const loadUserProfileData = async ()=>{
+    try {
+        
+        const {data}= await axios.get(backendUrl+ '/api/user/get-profile', {headers:{token}})
+        if(data.success){
+          console.log(data.userData);
+          
+          setUserData(data.userData)
+        }else{
+            toast.error(data.message)
+        }
+    } catch (error) {
+        console.log(error);
+        toast.error(error.message)
+    }
+}
+
   const getUserCart = async (token) => {
     try {
       const response = await axios.post(backendUrl +'/api/cart/get', {}, {headers:{token}})
@@ -123,17 +141,6 @@ const ShopContextProvider = (props) => {
       
     }
   }
-
- useEffect(()=>{
-    getProductsData()
- },[])
-
- useEffect(()=>{
-  if(!token && localStorage.getItem('token')){
-    setToken(localStorage.getItem('token'))
-    getUserCart(localStorage.getItem('token'))
-  }
- },[])
 
   const value = {
     products,
@@ -154,11 +161,35 @@ const ShopContextProvider = (props) => {
     getProductsData,
     setToken,
     token,
+    loadUserProfileData,
+    userData, setUserData
   };
+  
+ useEffect(()=>{
+    getProductsData()
+ },[])
+
+ useEffect(()=>{
+  if(token){
+      loadUserProfileData()
+  }else{
+      setUserData(false)
+  }
+},[token])
+
+ useEffect(()=>{
+  if(!token && localStorage.getItem('token')){
+    setToken(localStorage.getItem('token'))
+    getUserCart(localStorage.getItem('token'))
+  }
+ },[])
+
 
   return (
     
-    <ShopContext.Provider value={value}>{props.children}</ShopContext.Provider>
+    <ShopContext.Provider value={value}>
+      {props.children}
+    </ShopContext.Provider>
   );
 };
 
